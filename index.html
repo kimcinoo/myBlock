@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>myBlock</title>
     <script src="./blockly/blockly_compressed.js"></script>
+    <script src="./blockly/javascript_compressed.js"></script>
     <script src="./blockly/blocks_compressed.js"></script>
     <script src="./blockly/msg/js/en.js"></script>
     <style>
@@ -33,16 +34,7 @@
     <table>
       <tr>
         <td>
-          <h1><a href="https://developers.google.com/blockly/">Blockly</a> &gt;
-            <a href="../index.html">Demos</a> &gt; Resizable Blockly (Part 2)</h1>
-
-          <p>
-            Once an <a href="index.html">area is defined</a>, Blockly can be
-            injected and positioned over the area.
-            A resize handler keeps it in position as the page changes.
-          </p>
-
-          <p>&rarr; More info on <a href="https://developers.google.com/blockly/guides/configure/web/resizable">injecting resizable Blockly</a>&hellip;</p>
+          <textarea id="textarea-code" rows="20" cols="100"></textarea>
         </td>
       </tr>
       <tr>
@@ -93,6 +85,13 @@
      window.addEventListener('resize', onresize, false);
      onresize();
      Blockly.svgResize(demoWorkspace);
+
+     // Code Generation
+     function myUpdateFunction(event) {
+       var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+       document.getElementById('textarea-code').value = code;
+     }
+     demoWorkspace.addChangeListener(myUpdateFunction);
    </script>
 
   </body>
