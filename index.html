@@ -55,6 +55,83 @@
         console.log('fetch error:', err);
       });
     }
+    function createPrj() {
+      fetch('http://localhost:8088', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: "createProject"
+        })
+      })
+      .then(res => {
+        // handle response
+        var reader = res.body.getReader();
+        reader.read()
+        .then(({done, value}) => {
+          // need to check done
+          // ref - https://ko.javascript.info/fetch-progress
+          let chunks = new Uint8Array(value.length);
+          chunks.set(value, 0);
+          let result = new TextDecoder("utf-8").decode(chunks);
+          console.log(result);
+        });
+      })
+      .catch(err => {
+        // handle error
+        console.log('fetch error:', err);
+      });
+    }
+    function buildPrj() {
+      fetch('http://localhost:8088', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: "buildProject",
+          code: "<body><div class=\"ui-page\" id=\"main\"><div class=\"ui-header\"><h1>Tizen blockly application</h1></div><div class=\"ui-content\"></div></div><script>"
+ + document.getElementById('textarea-code').value + "<\/script><script type=\"text/javascript\" src=\"./lib/tau/mobile/js/tau.js\"><\/script><script src=\"./js/main.js\"><\/script><\/body>"
+        })
+      })
+      .then(res => {
+        // handle response
+        var reader = res.body.getReader();
+        reader.read()
+        .then(({done, value}) => {
+          // need to check done
+          // ref - https://ko.javascript.info/fetch-progress
+          let chunks = new Uint8Array(value.length);
+          chunks.set(value, 0);
+          let result = new TextDecoder("utf-8").decode(chunks);
+          console.log(result);
+        });
+      })
+      .catch(err => {
+        // handle error
+        console.log('fetch error:', err);
+      });
+    }
+    function installPrj() {
+      fetch('http://localhost:8088', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: "installProject"
+        })
+      })
+      .then(res => {
+        // handle response
+        var reader = res.body.getReader();
+        reader.read()
+        .then(({done, value}) => {
+          // need to check done
+          // ref - https://ko.javascript.info/fetch-progress
+          let chunks = new Uint8Array(value.length);
+          chunks.set(value, 0);
+          let result = new TextDecoder("utf-8").decode(chunks);
+          console.log(result);
+        });
+      })
+      .catch(err => {
+        // handle error
+        console.log('fetch error:', err);
+      });
+    }
     </script>
     <style>
       html, body {
@@ -85,6 +162,9 @@
         <td>
           <textarea id="textarea-code" rows="20" cols="100"></textarea>
           <button type="button" onclick="uploadClick()">Upload</button>
+          <button type="button" onclick="createPrj()">Create</button>
+          <button type="button" onclick="buildPrj()">Build</button>
+          <button type="button" onclick="installPrj()">Install</button>
         </td>
       </tr>
       <tr>
