@@ -30,3 +30,11 @@ Blockly.JavaScript['variables_set'] = function(block) {
       block.getFieldValue('VAR'), Blockly.VARIABLE_CATEGORY_NAME);
   return varName + ' = ' + argument0 + ';\n';
 };
+
+Blockly.JavaScript['rect'] = function(block) {
+  var value_name = Blockly.JavaScript.valueToCode(block, 'rect', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  //var code = '....;\n';
+  var code = 'document.getElementById(\'ui-content\').innerHTML += \'<div id=\"rect\" style=\"background-color: #ff0000; position: absolute; top: 100px; left: 100px; width: 100px; height: 100px;\"></div>\';\n';
+  return code;
+};

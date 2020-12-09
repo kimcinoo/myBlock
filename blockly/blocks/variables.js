@@ -159,5 +159,23 @@ Blockly.Constants.Variables.DELETE_OPTION_CALLBACK_FACTORY = function(block) {
   };
 };
 
+/**
+ * Test
+ * @param {!Blockly.Block} block The test block
+ * @return {!function()} A testlfunction
+ */
+Blockly.Blocks['rect'] = {
+  init: function() {
+    this.appendValueInput("rect")
+        .setCheck(null)
+        .appendField("rect");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
 Blockly.Extensions.registerMixin('contextMenu_variableSetterGetter',
     Blockly.Constants.Variables.CUSTOM_CONTEXT_MENU_VARIABLE_GETTER_SETTER_MIXIN);

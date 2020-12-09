@@ -85,7 +85,7 @@
         method: 'POST',
         body: JSON.stringify({
           name: "buildProject",
-          code: "<body><div class=\"ui-page\" id=\"main\"><div class=\"ui-header\"><h1>Tizen blockly application</h1></div><div class=\"ui-content\"></div></div><script>"
+          code: "<body><div class=\"ui-page\" id=\"main\"><div class=\"ui-header\"><h1>Tizen blockly application</h1></div><div class=\"ui-content\" id=\"ui-content\"></div></div><script>"
  + document.getElementById('textarea-code').value + "<\/script><script type=\"text/javascript\" src=\"./lib/tau/mobile/js/tau.js\"><\/script><script src=\"./js/main.js\"><\/script><\/body>"
         })
       })
@@ -185,6 +185,7 @@
       <block type="math_arithmetic"></block>
       <block type="text"></block>
       <block type="text_print"></block>
+      <block type="rect"></block>
     </xml>
 
     <script>
