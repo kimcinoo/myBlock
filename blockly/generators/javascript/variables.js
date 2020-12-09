@@ -34,7 +34,7 @@ Blockly.JavaScript['variables_set'] = function(block) {
 Blockly.JavaScript['rect'] = function(block) {
   var value_name = Blockly.JavaScript.valueToCode(block, 'rect', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  //var code = '....;\n';
+  // ui-content is key to place div for the rect;
   var code = 'document.getElementById(\'ui-content\').innerHTML += \'<div id=\"rect\" style=\"background-color: #ff0000; position: absolute; top: 100px; left: 100px; width: 100px; height: 100px;\"></div>\';\n';
   return code;
 };
