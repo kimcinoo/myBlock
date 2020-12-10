@@ -182,3 +182,14 @@ Blockly.JavaScript['controls_flow_statements'] = function(block) {
   }
   throw Error('Unknown flow statement.');
 };
+
+Blockly.JavaScript['mouse_event_handler'] = function(block) {
+  var dropdown_eventtype = block.getFieldValue('EventType');
+  var text_id = block.getFieldValue('ID');
+  var statements_statementinput = Blockly.JavaScript.statementToCode(block, 'statementInput');
+  var code = 'document.getElementById(\"' + text_id +
+             '\").' + dropdown_eventtype +
+             ' = function() {' + statements_statementinput +
+             '};\n';
+  return code;
+};

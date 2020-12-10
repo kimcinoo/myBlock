@@ -32,9 +32,18 @@ Blockly.JavaScript['variables_set'] = function(block) {
 };
 
 Blockly.JavaScript['rect'] = function(block) {
-  var value_name = Blockly.JavaScript.valueToCode(block, 'rect', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
-  // ui-content is key to place div for the rect;
-  var code = 'document.getElementById(\'ui-content\').innerHTML += \'<div id=\"rect\" style=\"background-color: #ff0000; position: absolute; top: 100px; left: 100px; width: 100px; height: 100px;\"></div>\';\n';
+  var text_id = block.getFieldValue('ID');
+  var number_x = block.getFieldValue('X');
+  var number_y = block.getFieldValue('Y');
+  var number_w = block.getFieldValue('W');
+  var number_h = block.getFieldValue('H');
+  var colour_color = block.getFieldValue('Color');
+  var code = 'document.getElementById(\'ui-content\').innerHTML += \'<div id=\"' + text_id +
+             '\" style=\"background-color: ' + colour_color +
+             '; position: absolute; left: ' + number_x +
+             'px; top: ' + number_y +
+             'px; width: ' + number_w +
+             'px; height: ' + number_h +
+             'px;\"></div>\';\n';
   return code;
 };

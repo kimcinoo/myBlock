@@ -353,5 +353,19 @@ Blockly.Constants.Loops.CONTROL_FLOW_IN_LOOP_CHECK_MIXIN = {
   }
 };
 
+Blockly.Blocks['mouse_event_handler'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("on mouse")
+        .appendField(new Blockly.FieldDropdown([["clicked","onclick"], ["over","onmouseover"]]), "EventType")
+        .appendField("of object")
+        .appendField(new Blockly.FieldTextInput("rect"), "ID");
+    this.appendStatementInput("statementInput")
+        .setCheck(null);
+    this.setColour(100);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
 Blockly.Extensions.registerMixin('controls_flow_in_loop_check',
     Blockly.Constants.Loops.CONTROL_FLOW_IN_LOOP_CHECK_MIXIN);

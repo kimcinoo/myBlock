@@ -166,11 +166,16 @@ Blockly.Constants.Variables.DELETE_OPTION_CALLBACK_FACTORY = function(block) {
  */
 Blockly.Blocks['rect'] = {
   init: function() {
-    this.appendValueInput("rect")
-        .setCheck(null)
-        .appendField("rect");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
+    this.appendDummyInput()
+        .appendField("rect id")
+        .appendField(new Blockly.FieldTextInput("rect"), "ID")
+        .appendField("gemometry")
+        .appendField(new Blockly.FieldNumber(0, 0, 720), "X")
+        .appendField(new Blockly.FieldNumber(0, 0, 720), "Y")
+        .appendField(new Blockly.FieldNumber(0, 60, 660), "W")
+        .appendField(new Blockly.FieldNumber(0, 60, 1020), "H")
+        .appendField(new Blockly.FieldColour("#ff0000"), "Color");
+    this.setInputsInline(true);
     this.setColour(230);
     this.setTooltip("");
     this.setHelpUrl("");
