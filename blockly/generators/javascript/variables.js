@@ -47,3 +47,22 @@ Blockly.JavaScript['rect'] = function(block) {
              'px;\"></div>\';\n';
   return code;
 };
+
+Blockly.JavaScript['image'] = function(block) {
+  var text_id = block.getFieldValue('ID');
+  var number_x = block.getFieldValue('X');
+  var number_y = block.getFieldValue('Y');
+  var number_w = block.getFieldValue('W');
+  var number_h = block.getFieldValue('H');
+  var dataURL = block.getFieldValue('DataURL');
+  var code = 'document.getElementById(\'ui-content\').innerHTML += \'<div id=\"' + text_id +
+             '\" style=\"position: absolute; left: ' + number_x +
+             'px; top: ' + number_y +
+             'px; width: ' + number_w +
+             'px; height: ' + number_h +
+             'px;\"><img width=' + number_w +
+             ' height=' + number_h +
+             ' src=\"' + dataURL +
+             '\"/></div>\';\n';
+  return code;
+};

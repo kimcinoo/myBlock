@@ -193,3 +193,42 @@ Blockly.JavaScript['mouse_event_handler'] = function(block) {
              '};\n';
   return code;
 };
+
+Blockly.JavaScript['move_with_key'] = function(block) {
+  var text_id = block.getFieldValue('ID');
+  var code = 'function leftArrowPressed() {' +
+             'var element = document.getElementById(\"' + text_id + '");' +
+             'element.style.left = parseInt(element.style.left) - 5 + \'px\'; }' +
+
+             'function rightArrowPressed() {' +
+             'var element = document.getElementById(\"' + text_id + '\");' +
+             'element.style.left = parseInt(element.style.left) + 5 + \'px\'; }' +
+
+             'function upArrowPressed() {' +
+             'var element = document.getElementById(\"' + text_id + '\");' +
+             'element.style.top = parseInt(element.style.top) - 5 + \'px\'; }' +
+
+             'function downArrowPressed() {' +
+             'var element = document.getElementById(\"' + text_id + '\");' +
+             'element.style.top = parseInt(element.style.top) + 5 + \'px\'; }' +
+
+             'function moveSelection(evt) {' +
+                'switch (evt.keyCode) {' +
+                    'case 37:' +
+                    'leftArrowPressed();' +
+                    'break;' +
+                    'case 39:' +
+                    'rightArrowPressed();' +
+                    'break;' +
+                    'case 38:' +
+                    'upArrowPressed();' +
+                    'break;' +
+                    'case 40:' +
+                    'downArrowPressed();' +
+                    'break;' +
+                    '}' +
+                '};' +
+
+             'window.addEventListener(\'keydown\', moveSelection);';
+  return code;
+};

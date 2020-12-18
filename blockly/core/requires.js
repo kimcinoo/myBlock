@@ -55,6 +55,7 @@ goog.require('Blockly.Warning');
 goog.require('Blockly.FieldAngle');
 goog.require('Blockly.FieldCheckbox');
 goog.require('Blockly.FieldColour');
+goog.require('Blockly.FieldFile');
 goog.require('Blockly.FieldDropdown');
 goog.require('Blockly.FieldLabelSerializable');
 goog.require('Blockly.FieldImage');

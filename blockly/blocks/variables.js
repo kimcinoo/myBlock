@@ -174,7 +174,30 @@ Blockly.Blocks['rect'] = {
         .appendField(new Blockly.FieldNumber(0, 0, 720), "Y")
         .appendField(new Blockly.FieldNumber(0, 60, 660), "W")
         .appendField(new Blockly.FieldNumber(0, 60, 1020), "H")
-        .appendField(new Blockly.FieldColour("#ff0000"), "Color");
+        .appendField(new Blockly.FieldColour("#ff0000"), "Color")
+    this.setInputsInline(true);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+/**
+ * Test
+ * @param {!Blockly.Block} block The test block
+ * @return {!function()} A testlfunction
+ */
+Blockly.Blocks['image'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("image id")
+        .appendField(new Blockly.FieldTextInput("image"), "ID")
+        .appendField("gemometry")
+        .appendField(new Blockly.FieldNumber(0, 0, 720), "X")
+        .appendField(new Blockly.FieldNumber(0, 0, 720), "Y")
+        .appendField(new Blockly.FieldNumber(0, 60, 660), "W")
+        .appendField(new Blockly.FieldNumber(0, 60, 1020), "H")
+        .appendField(new Blockly.FieldFile("d"), "DataURL");
     this.setInputsInline(true);
     this.setColour(230);
     this.setTooltip("");

@@ -367,5 +367,20 @@ Blockly.Blocks['mouse_event_handler'] = {
     this.setHelpUrl("");
   }
 };
+
+Blockly.Blocks['move_with_key'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("move")
+        .appendField(new Blockly.FieldTextInput("default"), "ID")
+        .appendField("with Key");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
 Blockly.Extensions.registerMixin('controls_flow_in_loop_check',
     Blockly.Constants.Loops.CONTROL_FLOW_IN_LOOP_CHECK_MIXIN);
