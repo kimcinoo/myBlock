@@ -3,6 +3,7 @@ import os
 import BaseHTTPServer
 import json
 import re
+from base64 import decodestring
 
 class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
    def do_GET(self):
@@ -50,6 +51,15 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
          print '[start] install project'
          os.system('tizen install -n blocklyprj.wgt -- /tmp/blocklyprj')
          print '[end] install project'
+      elif command['name'] == 'imageSend' :
+         print '[start] image send'
+         # print command['data']
+         image_data = command['data'].split(",")
+         image_data = image_data[1]
+         fh = open('/tmp/blocklyprj/' + command['fname'], 'wb')
+         fh.write(decodestring(image_data))
+         fh.close()
+         print '[end] image send'
 
 print "Listening on port 8088..."
 server = BaseHTTPServer.HTTPServer(("localhost", 8088), MyHandler)

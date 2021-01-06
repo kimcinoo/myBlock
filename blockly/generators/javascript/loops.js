@@ -227,8 +227,83 @@ Blockly.JavaScript['move_with_key'] = function(block) {
                     'downArrowPressed();' +
                     'break;' +
                     '}' +
+                  'overlapCheck();' +
                 '};' +
 
-             'window.addEventListener(\'keydown\', moveSelection);';
+             'window.addEventListener(\'keydown\', moveSelection);\n';
+  return code;
+};
+
+Blockly.JavaScript['object_overlap'] = function(block) {
+  var text_obja = block.getFieldValue('objA');
+  var text_objb = block.getFieldValue('objB');
+  var statements_input = Blockly.JavaScript.statementToCode(block, 'input');
+  var element = document.getElementById(text_obja);
+  var code = 'function overlapCheck() {' +
+               'var obja = document.getElementById(\"' + text_obja + '\");' +
+               'var objb = document.getElementById(\"' + text_objb + '\");' +
+               'if (obja.offsetLeft < objb.offsetLeft + objb.offsetWidth &&' +
+                 'obja.offsetLeft + obja.offsetWidth > objb.offsetLeft &&' +
+                 'obja.offsetTop < objb.offsetTop + objb.offsetHeight &&' +
+                 'obja.offsetTop + obja.offsetHeight > objb.offsetTop) {' +
+                 statements_input + '}' +
+             '};\n';
+  return code;
+};
+
+Blockly.JavaScript['move_variable_with_key'] = function(block) {
+  var vn = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+  var code = 'function leftArrowPressed() {' +
+             'var element = document.getElementById(\"' +  vn + '\");' +
+             'element.style.left = parseInt(element.style.left) - 5 + \'px\'; }' +
+
+             'function rightArrowPressed() {' +
+             'var element = document.getElementById(\"' + vn + '\");' +
+             'element.style.left = parseInt(element.style.left) + 5 + \'px\'; }' +
+
+             'function upArrowPressed() {' +
+             'var element = document.getElementById(\"' + vn + '\");' +
+             'element.style.top = parseInt(element.style.top) - 5 + \'px\'; }' +
+
+             'function downArrowPressed() {' +
+             'var element = document.getElementById(\"' + vn + '\");' +
+             'element.style.top = parseInt(element.style.top) + 5 + \'px\'; }' +
+
+             'function moveSelection(evt) {' +
+                'switch (evt.keyCode) {' +
+                    'case 37:' +
+                    'leftArrowPressed();' +
+                    'break;' +
+                    'case 39:' +
+                    'rightArrowPressed();' +
+                    'break;' +
+                    'case 38:' +
+                    'upArrowPressed();' +
+                    'break;' +
+                    'case 40:' +
+                    'downArrowPressed();' +
+                    'break;' +
+                    '}' +
+                  'overlapCheck();' +
+                '};' +
+
+             'window.addEventListener(\'keydown\', moveSelection);\n';
+  return code;
+};
+
+Blockly.JavaScript['object_variable_overlap'] = function(block) {
+  var obja = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('objA'), Blockly.Variables.NAME_TYPE);
+  var objb = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('objB'), Blockly.Variables.NAME_TYPE);
+  var statements_input = Blockly.JavaScript.statementToCode(block, 'input');
+  var element = document.getElementById(obja);
+  var code = 'function overlapCheck() {' +
+               'var obja = document.getElementById(\"' + obja + '\");' +
+               'var objb = document.getElementById(\"' + objb + '\");' +
+               'if (obja.offsetLeft < objb.offsetLeft + objb.offsetWidth &&' +
+                 'obja.offsetLeft + obja.offsetWidth > objb.offsetLeft &&' +
+                 'obja.offsetTop < objb.offsetTop + objb.offsetHeight &&' +
+                 'obja.offsetTop + obja.offsetHeight > objb.offsetTop) {' +
+                 statements_input + '}' +
+             '};\n';
   return code;
 };

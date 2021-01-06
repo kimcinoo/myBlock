@@ -187,7 +187,7 @@ Blockly.Blocks['rect'] = {
  * @param {!Blockly.Block} block The test block
  * @return {!function()} A testlfunction
  */
-Blockly.Blocks['image'] = {
+Blockly.Blocks['image_with_geometry'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("image id")
@@ -200,6 +200,76 @@ Blockly.Blocks['image'] = {
         .appendField(new Blockly.FieldFile("d"), "DataURL");
     this.setInputsInline(true);
     this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['image'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("image")
+        .appendField(new Blockly.FieldFile("d"), "DataURL");
+    this.setOutput(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['move_object'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("move")
+        .appendField(new Blockly.FieldTextInput("default"), "ID")
+        .appendField("to");
+    this.appendValueInput("X")
+        .setCheck("Number");
+    this.appendValueInput("Y")
+        .setCheck("Number");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(210);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['move_object_variable'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("move")
+        .appendField(new Blockly.FieldVariable("item"), "VAR")
+        .appendField("to");
+    this.appendValueInput("X")
+        .setCheck("Number");
+    this.appendValueInput("Y")
+        .setCheck("Number");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(210);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['obj_geometry_set'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("set")
+        .appendField(new Blockly.FieldVariable("item"), "OBJ")
+        .appendField("gemometry to")
+        .appendField(new Blockly.FieldNumber(0, 0, 720), "X")
+        .appendField(new Blockly.FieldNumber(0, 0, 720), "Y")
+        .appendField(new Blockly.FieldNumber(0, 60, 660), "W")
+        .appendField(new Blockly.FieldNumber(0, 60, 1020), "H")
+    this.setInputsInline(true);
+    this.setColour(230);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(210);
     this.setTooltip("");
     this.setHelpUrl("");
   }

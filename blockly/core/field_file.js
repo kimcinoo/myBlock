@@ -17,8 +17,6 @@ Blockly.FieldFile = function(opt_value, opt_class, opt_config) {
    */
   this.class_ = null;
 
-
-console.log('[GGGGGGGG] opt_value: ' + opt_value);
   Blockly.FieldFile.superClass_.constructor.call(this, opt_value, opt_config);
 
   if (!opt_config) {  // If the config was not passed use old configuration.
@@ -34,29 +32,46 @@ Blockly.utils.object.inherits(Blockly.FieldFile, Blockly.Field);
  */
 Blockly.FieldFile.prototype.SERIALIZABLE = true;
 
+function sendImageData(fileName, fileData) {
+  fetch('http://localhost:8088', {
+    method: 'POST',
+    body: JSON.stringify({
+      name: "imageSend",
+      fname: fileName,
+      data: fileData
+    })
+  })
+  .then(function(res) {
+    // handle response
+    console.log(res.status);
+  })
+  .catch(function(err) {
+    // handle error
+    console.log('fetch error:', err);
+  });
+}
 /**
  * Create and show the file selector.
  * @protected
  */
 Blockly.FieldFile.prototype.showEditor_ = function() {
   // Focus so we can start receiving keyboard events.
-   console.log('[GGGGGGGGGG] showEditor this: ' + this);
    var blockObject = this;
    var f = document.createElement('input');
    f.style.display='none';
    f.type='file';
    f.name='file';
    f.addEventListener('change',
-                      function() { 
-                        console.log(f.files[0].name);
+                      function() {
+                        var fileName = f.files[0].name ;
+                        console.log(fileName);
+                        blockObject.setValue(fileName);
+                        blockObject.render_();
+
                         var reader = new FileReader();
                         reader.onloadend = function() {
-                                             //console.log('[GGGGGGGGGG]this: ' + this + 'blockObj: ' + blockObject);
-                                             //console.log(reader.result);
-                                             blockObject.setValue(reader.result);
-                                             //TODO: blockObject.render_();
-                                             };
-                                             /*this.setValue(reader.result);}*/
+                                             sendImageData(fileName, reader.result);
+                                           };
                         reader.readAsDataURL(f.files[0]);
                       });
    f.click();
@@ -69,11 +84,13 @@ Blockly.FieldFile.prototype.showEditor_ = function() {
  * @protected
  */
 Blockly.FieldFile.prototype.doClassValidation_ = function(opt_newValue) {
+/*
   if (typeof opt_newValue != 'string') {
     return null;
   }
-console.log("[GGGGGGGGG] getText: " + this.getText());
+  console.log("[GGGGGGGGG] getText: " + this.getText());
   console.log("MYTODO: change return value");
+*/
   return opt_newValue
 };
 

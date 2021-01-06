@@ -132,6 +132,48 @@
         console.log('fetch error:', err);
       });
     }
+
+    function sendImageData(fileData) {
+      fetch('http://localhost:8088', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: "imageSend",
+          data: fileData
+        })
+      })
+      .then(res => {
+        // handle response
+        var reader = res.body.getReader();
+        reader.read()
+        .then(({done, value}) => {
+          // need to check done
+          // ref - https://ko.javascript.info/fetch-progress
+          let chunks = new Uint8Array(value.length);
+          chunks.set(value, 0);
+          let result = new TextDecoder("utf-8").decode(chunks);
+          console.log(result);
+        });
+      })
+      .catch(err => {
+        // handle error
+        console.log('fetch error:', err);
+      });
+    }
+
+    function sendImage(file) {
+        console.log('file:', file.name);
+        const formData = new FormData();
+        formData.append('myFile', file);
+        //const seriObj = formData.serialize();
+
+                        var reader = new FileReader();
+                        reader.onloadend = function() {
+                                           //blockObject.setValue(reader.result);
+                                           sendImageData(reader.result);
+                                           };
+                        reader.readAsDataURL(file);
+    }
+
     </script>
     <style>
       html, body {
@@ -165,6 +207,7 @@
           <button type="button" onclick="createPrj()">Create</button>
           <button type="button" onclick="buildPrj()">Build</button>
           <button type="button" onclick="installPrj()">Install</button>
+          <input id="test-input" type="file" value="Select Image">
         </td>
       </tr>
       <tr>
@@ -191,6 +234,16 @@
       <block type="image"></block>
       <block type="mouse_event_handler"></block>
       <block type="move_with_key"></block>
+      <block type="object_overlap"></block>
+      <block type="move_object"></block>
+      <block type="math_random_int"></block>
+      <block type="math_number"></block>
+      <block type="variables_set"></block>
+      <block type="obj_geometry_set"></block>
+      <block type="move_variable_with_key"></block>
+      <block type="object_variable_overlap"></block>
+      <block type="move_object_variable"></block>
+      <button text="Create variable..." callbackKey="newVarBtnPressed"></button>
     </xml>
 
     <script>
@@ -199,6 +252,11 @@
       var demoWorkspace = Blockly.inject(blocklyDiv,
           {media: './blockly/media/',
             toolbox: document.getElementById('toolbox')});
+
+      demoWorkspace.registerButtonCallback("newVarBtnPressed",
+          function(btn) {
+              Blockly.Variables.createVariableButtonHandler(btn.getTargetWorkspace());
+          });
 
       var onresize = function(e) {
       // Compute the absolute coordinates and dimensions of blocklyArea.
@@ -228,6 +286,13 @@
        document.getElementById('textarea-code').value = code;
      }
      demoWorkspace.addChangeListener(myUpdateFunction);
+
+    var h = document.getElementById('test-input');
+    function onSelectFile() {
+      console.log(h.files[0]);
+      sendImage(h.files[0]);
+    }
+    h.addEventListener('change', onSelectFile);
    </script>
 
   </body>
